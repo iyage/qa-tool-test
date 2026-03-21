@@ -8,3 +8,4 @@ const data = [
         password:"password456"
     }
 ]
+module.exports = data;
