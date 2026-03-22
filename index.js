@@ -2,7 +2,7 @@ const express = require('express');
 const data = require('./data');
 const app = express();
 const port = 5000;
-// app.use(express.json());
+app.use(express.json());
 app.get('/', (req, res) => {
   res.send('Hello World!');
 });
