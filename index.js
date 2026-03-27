@@ -34,7 +34,7 @@ app.post('/api/login', async (req, res) => {
     [email, password]
   );
 
-    if (rows.length === 0) {
+    if (rows.length == 0) {
     return res.status(401).json({ message: 'Invalid email or password!' });
   }
 
