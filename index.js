@@ -23,11 +23,11 @@ app.get('/api/users', async (_req, res) => {
 });
 
 app.post('/api/login', async (req, res) => {
-  const { email, password } = req.body;
+  try {
+    const { email, password } = req.body;
   if (!email || !password) {
     return res.status(400).json({ message: 'Email and password are required!' });
   }
-  try {
   const [rows] = await pool.query(
     'SELECT id FROM users WHERE email = ? AND password = ?',
     [email, password]
