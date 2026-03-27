@@ -27,7 +27,7 @@ app.post('/api/login', async (req, res) => {
   if (!email || !password) {
     return res.status(400).json({ message: 'Email and password are required!' });
   }
-
+  try {
   const [rows] = await pool.query(
     'SELECT id FROM users WHERE email = ? AND password = ?',
     [email, password]
@@ -38,6 +38,11 @@ app.post('/api/login', async (req, res) => {
   }
 
   return res.status(201).json({ message: 'Login successful!' });
+
+} catch (error) {
+  console.error('Error logging in:', error);
+  return res.status(500).json({ message: 'Internal server error' });
+}
 });
 
 app.listen(port, () => {
