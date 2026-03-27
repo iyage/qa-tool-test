@@ -2,12 +2,17 @@ require('dotenv').config();
 const express = require('express');
 const pool = require('./db');
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 8000;
 
 app.use(express.json());
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
+});
+
+app.get('/api/users', async (_req, res) => {
+  const [rows] = await pool.query('SELECT id, email FROM users');
+  return res.status(200).json(rows);
 });
 
 app.post('/api/login', async (req, res) => {
