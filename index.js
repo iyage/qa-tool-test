@@ -23,8 +23,8 @@ app.get('/api/users', async (_req, res) => {
 });
 
 app.post('/api/login', async (req, res) => {
-  try {
     const { email, password } = req.body;
+  try {
   if (!email || !password) {
     console.warn('Email or password missing in request body');
     return res.status(400).json({ message: 'Email and password are required!' });
