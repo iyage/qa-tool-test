@@ -23,26 +23,26 @@ app.get('/api/users', async (_req, res) => {
 });
 
 app.post('/api/login', async (req, res) => {
-    const { email, password } = req.body;
-  try {
+  const { email, password } = req.body;
   if (!email || !password) {
     console.warn('Email or password missing in request body');
     return res.status(400).json({ message: 'Email and password are required!' });
   }
+  try {
   const [rows] = await pool.query(
     'SELECT id FROM users WHERE email = ? AND password = ?',
     [email, password]
   );
 
-    if (rows.length == 0) {
+    if (rows.length === 0) {
     return res.status(401).json({ message: 'Invalid email or password!' });
   }
 
-  return res.status(201).json({ message: 'Login successful!' });
+    return res.status(201).json({ message: 'Login successful!!!!' });
 
 } catch (error) {
   console.error('Error logging in:', error);
-  return res.status(500).json({ message: 'Internal server error' });
+    return res.status(500).json({ message: 'Internal server error!!!!!' });
 }
 });
 
