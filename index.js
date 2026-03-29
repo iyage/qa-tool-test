@@ -48,18 +48,18 @@ app.get('/api/users/:email', async (req, res) => {
   }
 });
 
-app.delete('/api/users/:id', async (req, res) => {
-  try {
-    const [result] = await pool.query('DELETE FROM users WHERE id = ?', [req.params.id]);
-    if (result.affectedRows === 0) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-    return res.status(200).json({ message: 'User deleted' });
-  } catch (error) {
-    console.error('Error deleting user:', error);
-    return res.status(500).json({ message: 'Internal server error' });
-  }
-});
+// app.delete('/api/users/:id', async (req, res) => {
+//   try {
+//     const [result] = await pool.query('DELETE FROM users WHERE id = ?', [req.params.id]);
+//     if (result.affectedRows === 0) {
+//       return res.status(404).json({ message: 'User not found' });
+//     }
+//     return res.status(200).json({ message: 'User deleted' });
+//   } catch (error) {
+//     console.error('Error deleting user:', error);
+//     return res.status(500).json({ message: 'Internal server error' });
+//   }
+// });
 
 app.post('/api/login', async (req, res) => {
   const { email, password } = req.body;
