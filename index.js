@@ -58,14 +58,14 @@ app.put('/api/users/:id', async (req, res) => {
   if (!email && !password) {
     return res.status(400).json({ message: 'At least one field (email, password) is required' });
   }
-  try {
+  // try {
     const updated = await userService.updateUser(req.params.id, { email, password });
     if (!updated) return res.status(404).json({ message: 'User not found' });
     return res.status(200).json({ message: 'User updated' });
-  } catch (error) {
-    console.error('Error updating user:', error);
-    return res.status(500).json({ message: 'Internal server error' });
-  }
+  // } catch (error) {
+  //   console.error('Error updating user:', error);
+  //   return res.status(500).json({ message: 'Internal server error' });
+  // }
 });
 
 app.post('/api/login', async (req, res) => {
