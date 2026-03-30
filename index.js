@@ -56,6 +56,29 @@ app.delete('/api/users/:id', async (req, res) => {
   return res.status(200).json({ message: 'User deleted' });
 });
 
+app.put('/api/users/:id', async (req, res) => {
+  const { email, password } = req.body;
+  if (!email && !password) {
+    return res.status(400).json({ message: 'At least one field (email, password) is required' });
+  }
+  try {
+    const fields = [];
+    const values = [];
+    if (email) { fields.push('email = ?'); values.push(email); }
+    if (password) { fields.push('password = ?'); values.push(password); }
+    values.push(req.params.id);
+
+    const [result] = await pool.query(`UPDATE users SET ${fields.join(', ')} WHERE id = ?`, values);
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    return res.status(200).json({ message: 'User updated' });
+  } catch (error) {
+    console.error('Error updating user:', error);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
 app.post('/api/login', async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {
