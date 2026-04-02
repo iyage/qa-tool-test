@@ -9,6 +9,10 @@ async function getUserById(id) {
   const [rows] = await pool.query('SELECT id, email FROM users WHERE id = ?', [id]);
   return rows[0] ?? null;
 }
+async function getUserPosts(id) {
+  const [rows] = await pool.query('SELECT *  FROM posts WHERE user_id = ?', [id]);
+  return rows[0] ?? null;
+}
 
 async function getUserByEmail(email) {
   const [rows] = await pool.query('SELECT id, email FROM users WHERE email = ?', [email]);
@@ -39,4 +43,4 @@ async function findByCredentials(email, password) {
   return rows[0] ?? null;
 }
 
-module.exports = { getAllUsers, getUserById, getUserByEmail, updateUser, deleteUser, findByCredentials };
+module.exports = { getAllUsers, getUserById, getUserByEmail, updateUser, deleteUser, findByCredentials, getUserPosts };

@@ -11,13 +11,18 @@ app.get('/', (req, res) => {
 });
 
 app.get('/api/users', async (_req, res) => {
-  // try {
+  try {
     const users = await userService.getAllUsers();
     return res.status(200).json(users);
-  // } catch (error) {
-  //   console.error('Error fetching users:', error);
-  //   return res.status(500).json({ message: 'Internal server error' });
-  // }
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+});
+app.get('/api/users/posts', async (req, res) => {
+  const { id } = req.params;
+  const users = await userService.getUserPosts(id);
+  return res.status(200).json(users);
 });
 
 app.get('/api/users/id/:id', async (req, res) => {
