@@ -20,7 +20,7 @@ app.get('/api/users', async (_req, res) => {
   }
 });
 app.get('/api/users/posts', async (req, res) => {
-  const { id } = req.params;
+  const { id } = req.query;
   const users = await userService.getUserPosts(id);
   return res.status(200).json(users);
 });
