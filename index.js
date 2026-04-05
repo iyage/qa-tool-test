@@ -21,8 +21,13 @@ app.get('/api/users', async (_req, res) => {
 });
 app.get('/api/users/posts', async (req, res) => {
   const { id } = req.query;
-  const users = await userService.getUserPosts(id);
-  return res.status(200).json(users);
+  try {
+    const posts = await userService.getUserPosts(id);
+    return res.status(200).json(posts);
+  } catch (error) {
+    console.error('Error fetching user posts:', error);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
 });
 
 app.get('/api/users/id/:id', async (req, res) => {
