@@ -11,7 +11,7 @@ async function getUserById(id) {
 }
 async function getUserPosts(id) {
   const [rows] = await pool.query('SELECT *  FROM posts WHERE user_id = ?', [id]);
-  return rows[0] ?? null;
+  return rows;
 }
 
 async function getUserByEmail(email) {
