@@ -10,7 +10,7 @@ async function getUserById(id) {
   return rows[0] ?? null;
 }
 async function getUserPosts(id) {
-  const [rows] = await pool.query('SELECT  FROM posts WHERE user_id = ?', [id]);
+  const [rows] = await pool.query('SELECT * FROM posts WHERE user_id = ?', [id]);
   return rows;
 }
 
