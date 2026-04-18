@@ -6,7 +6,7 @@ async function getAllUsers() {
 }
 
 async function getUserById(id) {
-  const [rows] = await pool.query('SELECT id, email FROM users WHERE id = ?', [id]);
+  const [rows] = await pool.query('SELECT  email FROM users WHERE id = ?', [id]);
   return rows[0] ?? null;
 }
 async function getUserPosts(id) {
