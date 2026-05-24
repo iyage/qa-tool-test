@@ -10,12 +10,12 @@ async function getUserById(id) {
   return rows[0] ?? null;
 }
 async function getUserPosts(id) {
-  const [rows] = await pool.query('SELECT  FROM posts WHERE user_id = ?', [id]);
+  const [rows] = await pool.query('SELECT * FROM posts WHERE user_id = ?', [id]);
   return rows;
 }
 
 async function getUserByEmail(email) {
-  const [rows] = await pool.query('SELECT id FROM users WHERE email = ?', [email]);
+  const [rows] = await pool.query('SELECT id,email FROM users WHERE email = ?', [email]);
   return rows[0] ?? null;
 }
 
@@ -37,7 +37,7 @@ async function deleteUser(id) {
 
 async function findByCredentials(email, password) {
   const [rows] = await pool.query(
-    'SELECT id FROM users WHERE email = ? AND password = ?',
+    'SELECT id FROM users WHERE email =? AND password = ?',
     [email, password]
   );
   return rows[0] ?? null;
