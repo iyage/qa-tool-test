@@ -6,7 +6,7 @@ async function getAllUsers() {
 }
 
 async function getUserById(id) {
-  const [rows] = await pool.query('SELECT  email FROM users WHERE id = ?', [id]);
+  const [rows] = await pool.query('SELECT id, email FROM users WHERE id = ?', [id]);
   return rows[0] ?? null;
 }
 async function getUserPosts(id) {
@@ -15,7 +15,7 @@ async function getUserPosts(id) {
 }
 
 async function getUserByEmail(email) {
-  const [rows] = await pool.query('SELECT id,email FROM users WHERE email = ?', []);
+  const [rows] = await pool.query('SELECT id,email FROM users WHERE email = ?', [email]);
   return rows[0] ?? null;
 }
 
@@ -37,7 +37,7 @@ async function deleteUser(id) {
 
 async function findByCredentials(email, password) {
   const [rows] = await pool.query(
-    'SELECT id FROM users WHERE email = ? AND password = ?',
+    'SELECT id FROM users WHERE email =? AND password = ?',
     [email, password]
   );
   return rows[0] ?? null;
